@@ -107,11 +107,7 @@ ifeq ($(BOARD_USES_SAMSUNG_HDMI),true)
 endif
 
 ifeq ($(TARGET_USES_QCOM_BSP), true)
-ifneq ($(TARGET_QCOM_DISPLAY_VARIANT),)
-    LOCAL_C_INCLUDES += hardware/qcom/display-$(TARGET_QCOM_DISPLAY_VARIANT)/libgralloc
-else
-    LOCAL_C_INCLUDES += hardware/qcom/display/$(TARGET_BOARD_PLATFORM)/libgralloc
-endif
+    LOCAL_C_INCLUDES += $(call project-path-for,qcom-display)/$(platform-for-display)/libgralloc
     LOCAL_CFLAGS += -DQCOM_BSP
 endif
 

@@ -41,13 +41,9 @@ LOCAL_SHARED_LIBRARIES := \
 
 # Executed only on QCOM BSPs
 ifeq ($(TARGET_USES_QCOM_BSP),true)
-ifneq ($(TARGET_QCOM_DISPLAY_VARIANT),)
-    LOCAL_C_INCLUDES += hardware/qcom/display-$(TARGET_QCOM_DISPLAY_VARIANT)/libgralloc
-    LOCAL_C_INCLUDES += hardware/qcom/display-$(TARGET_QCOM_DISPLAY_VARIANT)/libqdutils
-else
-    LOCAL_C_INCLUDES += hardware/qcom/display/$(TARGET_BOARD_PLATFORM)/libgralloc
-    LOCAL_C_INCLUDES += hardware/qcom/display/$(TARGET_BOARD_PLATFORM)/libqdutils
-endif
+    display_path := $(call project-path-for,qcom-display)/$(platform-for-display)
+    LOCAL_C_INCLUDES += $(display_path)/libgralloc
+    LOCAL_C_INCLUDES += $(display_path)/libqdutils
     LOCAL_CFLAGS += -DQCOM_BSP
 endif
 
