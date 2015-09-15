@@ -105,7 +105,9 @@ status_t GraphicBufferAllocator::alloc(uint32_t width, uint32_t height,
     status_t err;
 
     // Filter out any usage bits that should not be passed to the gralloc module
+#ifdef GRALLOC_USAGE_ALLOC_MASK
     usage &= GRALLOC_USAGE_ALLOC_MASK;
+#endif
 
     int outStride = 0;
     err = mAllocDev->alloc(mAllocDev, static_cast<int>(width),
